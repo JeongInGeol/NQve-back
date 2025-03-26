@@ -4,9 +4,9 @@ server :
 spring :
   datasource:
      url:
-      jdc:postgresql://localhost:5432/igvibe
+      jdbc:postgresql://localhost:5432/
      username : postgres
-     password : password
+     password : ghfkddl1!
   jpa :
       hibernate:
         ddl-auto : update
