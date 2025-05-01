@@ -40,3 +40,12 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootRun {
+	if (project.file('.env').exists()) {
+		project.file('.env').eachLine {
+			def (key, value) = it.tokenize('=')
+			systemProperty key, value
+		}
+	}
+}
