@@ -4,9 +4,9 @@ server :
 spring :
   datasource:
      url:
-      jdbc:postgresql://localhost:5432/
-     username : postgres
-     password : ghfkddl1!
+      jdbc:postgresql://localhost:5432/nqve_db
+     username : nqve_user
+     password : lucidEdgeStart
   jpa :
       hibernate:
         ddl-auto : update
