@@ -8,6 +8,7 @@ public class NQveBackApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(NQveBackApplication.class, args);
+		System.out.println("CI test");
 	}
 
 }
