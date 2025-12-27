@@ -4,17 +4,16 @@ server :
 spring :
   datasource:
      url:
-      jdbc:postgresql://localhost:5432/nqve_db
+      jdbc:postgresql://db:5432/nqve_db
      username : nqve_user
-     password : lucidEdgeStart
+     password : 1234
   jpa :
       hibernate:
         ddl-auto : update
       show-sql : true
-  data :
-     redis :
-      host : localhost
-      port: 6379
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
   security :
     oauth2:
       client:
