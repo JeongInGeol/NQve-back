@@ -2,11 +2,8 @@ server :
   port : 8080
 
 spring :
-  datasource:
-     url:
-      jdbc:postgresql://db:5432/nqve_db
-     username : nqve_user
-     password : 1234
+  profiles:
+    active: local
   jpa :
       hibernate:
         ddl-auto : update
