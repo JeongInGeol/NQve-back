@@ -70,7 +70,6 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         script: |
           cd ${{ secrets.BACKEND_DEPLOY_DIR }}
-          git pull
           docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_PAT }}
           docker pull ${{ env.IMAGE_NAME }}:latest
           BACKEND_IMAGE=${{ env.IMAGE_NAME }}:latest docker compose up -d db
