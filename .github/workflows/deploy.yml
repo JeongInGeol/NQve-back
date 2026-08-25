@@ -16,7 +16,6 @@ jobs:
     permissions: #GitHub 내부 API/리소스 접근 권한
       contents: read #repository 내용 읽기 가능, uses: actions/checkout@v4로 소스를 받아오잖아. 그러려면 repository contents를 읽을 권한이 필요함. (소스 읽어)
       packages: write #GitHub Packages에 쓰기 가능, GHCR이 GitHub Packages 계열이라서 나중에 docker push ghcr.io/...로 Docker 이미지를 올리려면 이 권한이 필요함. (GHCR에 이미지 올려)
-      actions: read #GitHub Actions 관련 리소스/정보를 읽을 수 있음. 그냥 이건 대충 Github Actions 정보 읽어야 된다라고 이해하셈. (Github actions 정보 읽어) *필요 없단다
 
     steps:
     - name: Checkout source #예약어 X
@@ -74,4 +73,3 @@ jobs:
           docker pull ${{ env.IMAGE_NAME }}:latest
           BACKEND_IMAGE=${{ env.IMAGE_NAME }}:latest docker compose up -d db
           BACKEND_IMAGE=${{ env.IMAGE_NAME }}:latest docker compose up -d --no-build app
-#git pull 하는 이유는 docker_compose.yml이나 .env 최신화 하려고.

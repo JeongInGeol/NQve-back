@@ -1,9 +1,14 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:15
-    container_name: nqve-postgres
+
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -17,7 +22,6 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: nqve-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
@@ -32,8 +36,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nqve-back:latest
-    container_name: nqve-back
+    image: ${BACKEND_IMAGE:-nqve-back:latest} #:- <<< 이게 기본 fallback 문법임
 
     env_file:
       - .env
@@ -47,7 +50,8 @@ services:
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "9000:8080"
     networks:
