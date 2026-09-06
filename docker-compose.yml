@@ -38,8 +38,6 @@ services:
       dockerfile: Dockerfile
     image: ${BACKEND_IMAGE:-nqve-back:latest} #:- <<< 이게 기본 fallback 문법임
 
-    env_file:
-      - .env
     environment:
       SPRING_PROFILES_ACTIVE: docker
       DB_HOST: ${DB_HOST}
